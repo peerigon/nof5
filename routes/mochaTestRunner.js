@@ -26,8 +26,10 @@ if (!isModuleRootDir) {
 }
 
 //Render Mocha Test-Runner
-exports.mochaTestRunner = function(req, res) {
+module.exports = function mochaTestRunner(req, res) {
     res.render("mochaTestRunner", {
-        title: "Mocha Test-Runner"
+        title: "Mocha Test-Runner",
+        tests: {},
+        assertionSuite: "expect"
     });
 };

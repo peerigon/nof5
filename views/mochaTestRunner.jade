@@ -1,16 +1,14 @@
 extends layout
 
-block append styles
-    link(rel="stylesheet", href="public/stylesheets/mocha.css")
+append stylesheets
+    link(rel="stylesheet", href="stylesheets/mocha.css")
 
-block append scripts
-    - each test in tests
-        script(type="text/javascript", src="test/" + test)
+append javascripts
+    script(type="text/javascript", src="javascripts/test_runner/mocha/mocha.js")
+    script(type="text/javascript", src="javascripts/test_runner/mocha/mocha.setup.js")
+    script(type="text/javascript", src="javascripts/test_runner/mocha/mocha.run.js")
+    //- each test in tests
+        //script(type="text/javascript", src="test/" + test)
 
-    script(type="text/javascript", src="public/javascripts/test_runner/mocha/mocha.js")
-    script(type="text/javascript", src="public/javascripts/test_runner/mocha/mocha.setup.js")
-    script(type="text/javascript", src="public/javascripts/test_runner/mocha/mocha.run.js")
-
-block append body
-
-div#mocha
+append content
+    div#mocha

@@ -9,6 +9,9 @@ nof5.configure(function(){
     //Setup view rendering
     nof5.set("views", __dirname + "/views");
     nof5.set("view engine", "jade");
+    nof5.set('view options', {
+        layout: false
+    });
 
     //Setup middleware
     nof5.use(express.bodyParser()); //@TODO Does nof5 need bodyParser?
@@ -29,10 +32,8 @@ nof5.listen(11234, function(){
 });
 
 //Start socket.io-sever
-socketIO("connection", function (socket) {
+socketIO.sockets.on("connection", function (socket) {
 
-    socket.emit("f5");
+    //socket.emit("f5");
 
 });
-
-
