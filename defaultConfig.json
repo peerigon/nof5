@@ -1,0 +1,6 @@
+{
+    "testDirPath": "./",
+    "port": 11234,
+    "assertionSuite": "expect.js",
+    "testRunner": "mocha"
+}
