@@ -1,16 +1,15 @@
 !!! 5
 
 html
-    head
+  head
+    block head
 
-        title= title
+      block stylesheets
 
-        block stylesheets
-
-        block javascripts
-            script(type="text/javascript", src="javascripts/assertion_suites/" + assertionSuite + ".js")
-            script(type="text/javascript", src="/socket.io/socket.io.js")
-            script(type="text/javascript", src="javascripts/socket.io/connector.js")
-
-    body
-        block content
+      block javascripts
+        if assertionSuite
+          script(type="text/javascript", src="javascripts/assertion_suites" + assertionSuite + ".js")
+        script(type="text/javascript", src="/socket.io/socket.io.js")
+        script(type="text/javascript", src="javascripts/socket.io/connector.js")
+  body
+    block content
