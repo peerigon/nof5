@@ -1,3 +1,13 @@
-var socket = io.connect("http://localhost");
+"use strict";
 
-socket.on("f5", location.reload);
+(function (window) {
+    var socket = io.connect("http://localhost");
+
+    function reRunTests() {
+        location.reload();
+    }
+
+    socket.on("f5", reRunTests)
+    ;
+})(window);
+
