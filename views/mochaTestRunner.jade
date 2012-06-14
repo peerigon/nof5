@@ -7,14 +7,14 @@ append stylesheets
   link(rel="stylesheet", href="stylesheets/mocha.css")
 
 append javascripts
+  script(type="text/javascript", src="javascripts/test_runner/mocha/mocha.js")
   if useBrowserify
-    script #{bundle}
+    != "<script> function enableTests() {" + bundle + " };</script>"
   else
     - each test in bundle
       script(type="text/javascript", src="test/" + test)
-  script(type="text/javascript", src="javascripts/test_runner/mocha/mocha.js")
   script(type="text/javascript", src="javascripts/test_runner/mocha/mocha.setup.js")
-  script(type="text/javascript", src="javascripts/test_runner/mocha/mocha.run.js")
+  script onload = function () { enableTests(); mocha.run(); };
 
 append content
     div#mocha
