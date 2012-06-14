@@ -4,7 +4,8 @@
     "private": true,
     "dependencies": {
         "express": "2.5.8",
-        "jade": ">= 0.0.1"
+        "jade": ">= 0.0.1",
+        "fshelpers": "git://github.com/pandaa/fshelpers.git"
     },
     "main": "lib/nof5.js"
 }
