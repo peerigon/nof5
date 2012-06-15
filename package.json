@@ -1,17 +1,31 @@
 {
-    "name": "application-name",
-    "version": "0.0.1",
-    "private": true,
+    "name": "nof5",
+    "description": "A tool which runs unit tests if a file has changed on the server in a browser",
+    "version": "0.0.2",
+    "author": {
+        "name": "Paul Torka",
+        "email": "paul.torka@yahoo.de"
+    },
+    "contributors": [
+        { "name": "Paul Torka", "email": "paul.torka@yahoo.de" },
+        { "name": "Johannes Ewald", "email": "mail@johannesewald.de" }
+    ],
     "dependencies": {
         "express": "2.5.8",
+        "socket.io": "0.9.x",
         "jade": ">= 0.0.1",
-        "fshelpers": "git://github.com/pandaa/fshelpers.git",
-        "underscore": "1.3.x"
+        "underscore": "1.3.x",
+        "fshelpers": "git://github.com/pandaa/fshelpers.git"
     },
     "devDependencies": {
         "mocha": "1.1.x",
         "expect.js": "0.1.x"
     },
+    "keywords": ["unit", "test", "testing", "tdd", "bdd", "browser", "nof5", "automated"],
+    "repository": "git://github.com/pandaa/nof5.git",
     "main": "lib/index.js",
-    "bin": "lib/nof5.js"
+    "bin": { "nof5": "lib/nof5.js" },
+    "scripts": {
+
+    }
 }
