@@ -4,6 +4,7 @@
     var socket = io.connect("http://localhost");
 
     function reRunTests() {
+        console.log("re-running tests");
         location.reload();
     }
 
