@@ -24,7 +24,7 @@
     "keywords": ["unit", "test", "testing", "tdd", "bdd", "browser", "nof5", "automated"],
     "repository": "git://github.com/pandaa/nof5.git",
     "main": "lib/index.js",
-    "bin": { "nof5": "lib/nof5.js" },
+    "bin": { "nof5": "./bin/nof5.js" },
     "scripts": {
 
     }
