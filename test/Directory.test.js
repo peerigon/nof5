@@ -1,15 +1,15 @@
 var expect = require("expect.js"),
-    Directory = require("../lib/Directory.js");
+    DirectoryWatcher = require("../lib/DirectoryWatcher.js");
 
 describe("#Directory", function () {
 
     describe("#construct", function() {
         it("should be a Function", function () {
-            expect(Directory).to.be.a(Function);
+            expect(DirectoryWatcher).to.be.a(Function);
         });
 
         it("should be an instance of Directory", function () {
-           expect(new Directory()).to.be.an(Directory);
+           expect(new DirectoryWatcher()).to.be.an(DirectoryWatcher);
         });
     });
 
