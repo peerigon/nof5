@@ -12,5 +12,6 @@
         "mocha": "1.1.x",
         "expect.js": "0.1.x"
     },
-    "main": "lib/nof5.js"
+    "main": "lib/index.js",
+    "bin": "lib/nof5.js"
 }
