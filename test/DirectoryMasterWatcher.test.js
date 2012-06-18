@@ -1,6 +1,9 @@
 var expect = require("expect.js"),
+    fs = require("fs"),
+    path = require("path"),
     _ = require("underscore"),
-    DirectoryMasterWatcher = require("../lib/DirectoryMasterWatcher.js");
+    DirectoryMasterWatcher = require("../lib/DirectoryMasterWatcher.js"),
+    EventEmitter = require("events").EventEmitter;
 
 describe("#DirectoryMasterWatcher", function () {
 
@@ -24,45 +27,64 @@ describe("#DirectoryMasterWatcher", function () {
         it("should be a DirectoryMasterWatcher", function () {
             expect(new DirectoryMasterWatcher(__dirname)).to.be.a(DirectoryMasterWatcher);
         });
+
+        it("should inherit from EventEmitter", function () {
+            expect(new DirectoryMasterWatcher(__dirname)).to.be.an(EventEmitter);
+        });
     });
 
-    describe("#methods", function () {
+    describe("#Events", function () {
 
-        var nof5RootDir = __dirname.replace("/test", ""),
-            dMW = new DirectoryMasterWatcher(nof5RootDir),
-            watchedDirectories = dMW.getWatchedDirectories(),
-            directoryFilter = /[\/\\]\..*$/g;
+        var directoryMasterWatcher,
+            nof5RootDir = path.resolve(__dirname + "/../"),
+            dummyDirectory = __dirname + "/dummyDirectory/";
 
-        function isValidDirectory(dirPath) {
-            return dirPath.search(directoryFilter) === -1;
-        }
+        beforeEach(function (done) {
+            directoryMasterWatcher = new DirectoryMasterWatcher(nof5RootDir);
 
-        function isNodeModulesDirectory(dirPath) {
-            return dirPath === "node_modules";
-        }
+            fs.mkdir(dummyDirectory, function (error) {
 
-        describe("#getWatchedDirectories()", function () {
+                if (error && error.code !== "EEXIST") {
+                    throw error;
+                }
 
-            it("should return an Array", function () {
-                expect(watchedDirectories).to.be.an(Array);
+                done();
             });
+        });
 
-            it("should return an Array with at least one item/path to a dir", function () {
-                expect(watchedDirectories.length > 0).to.be.ok();
-            });
+        afterEach(function () {
+            directoryMasterWatcher.close();
+        });
 
-            it("should contain only paths to (visible/no dot as prefix) directories", function () {
-                _.each(watchedDirectories, function (dirPath) {
-                    expect(isValidDirectory(dirPath)).to.be.ok();
+        describe("should not throw an 'dirChange'-Event after a call of close()", function () {
+
+            it("should not throw an 'dirChange'-Event after a call of close()", function (done) {
+                directoryMasterWatcher.on("change", function () {
+                    throw new Error("Execution of 'change'-Event-Listener after call to close: Test Failed.");
+                });
+
+                directoryMasterWatcher.close();
+
+                fs.rmdir(dummyDirectory, function (error) {
+                    if(error) {
+                        throw error;
+                    }
+
+                    done();
                 });
             });
 
-            it("should not contain any node_modules directory", function () {
-                _.each(watchedDirectories, function (dirPath) {
-                    expect(isNodeModulesDirectory(dirPath)).not.to.be.ok();
+            it("should throw an 'change'-Event if in any watched directory a change occurs", function (done) {
+                directoryMasterWatcher.once("change", function (event, filename) {
+                    done();
+                });
+
+                fs.rmdir(dummyDirectory, function (error) {
+                    if (error) {
+                        throw error;
+                    }
                 });
             });
-
         });
     });
 });
