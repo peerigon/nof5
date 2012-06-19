@@ -1,6 +1,6 @@
 var expect = require("expect.js"),
     path = require("path"),
-    getTestRunner = require("../lib/getTestRunner.js");
+    getTestRunner = require("../lib/getTestRunnerRenderer.js");
 
 describe("#getTestRunner", function () {
 
