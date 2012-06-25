@@ -1,7 +1,5 @@
 {
     "modulePath": "process.cwd()",
     "port": 11234,
-    "assertionSuite": "expect.js",
-    "testRunnerSuite": "mocha",
-    "useBrowserify": true
+    "browserify": true
 }
