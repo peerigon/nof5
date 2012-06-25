@@ -7,7 +7,7 @@ See the following documentation as roadmap:
 
 # Description
 
-nof5 is a tool ...
+nof5 is a tool which relies on express.js and socket.io and provides automated bundling and re-running of tests.
 
 # Running Tests
 
