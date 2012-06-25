@@ -1,5 +1,0 @@
-{
-    "modulePath": "process.cwd()",
-    "port": 11234,
-    "browserify": true
-}
