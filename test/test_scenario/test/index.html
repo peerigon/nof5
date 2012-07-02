@@ -4,11 +4,27 @@
 <head>
     <title>Test Scenario</title>
 
-    <script src="assets/jquery-9.9.9.js"></script>
-    <script src="tests.js"></script>
+    <link rel="stylesheet" href="assets/mocha-1.2.1.css" />
+
+    <script type="text/javascript" src="assets/jquery-9.9.9.js"></script>
+
+    <script type="text/javascript" src="assets/mocha-1.2.1.js"></script>
+
+    <script type="text/javascript" src="tests.js"></script>
+
+    <script>
+        onload = function () {
+            mocha.setup("bdd");
+            enableTests();
+
+            mocha.run();
+        };
+    </script>
 
 </head>
 <body>
+    <div id="mocha">
 
+    </div>
 </body>
 </html>
