@@ -4,7 +4,6 @@ var http = require("http"),
     expect = require("expect.js"),
     express = require("express"),
     rewire = require("rewire"),
-    Bundler = require("../lib/Bundler.js"),
     SimpleExpressServer = rewire("../lib/SimpleExpressServer.js");
 
 var testFolderPath,
@@ -18,16 +17,20 @@ var testFolderPath,
 describe("SimpleExpressServer", function () {
 
     before(function () {
+
         SimpleExpressServer.__set__({
             console: {
-                log: function () { /* be quite */ }
+                log: function () {
+                    // be quite
+                }
             }
         });
+
     });
 
     beforeEach(function () {
+
         testFolderPath = __dirname + "/test_scenario/test/";
-        bundler = new Bundler(testFolderPath, false);
         port = 43211;
 
         requestOptions = {
@@ -37,7 +40,7 @@ describe("SimpleExpressServer", function () {
             method: "GET"
         };
 
-        simpleExpressServer = new SimpleExpressServer(testFolderPath, bundler, port);
+        simpleExpressServer = new SimpleExpressServer(testFolderPath, port);
     });
 
     afterEach(function () {
@@ -55,6 +58,28 @@ describe("SimpleExpressServer", function () {
                     done();
                 });
             });
+
+            request.end();
+
+        });
+
+    });
+
+    describe("# get()", function () {
+
+        it("should execute middleware if request was send to given path", function (done) {
+
+            var middleware = function (req, res) {
+                    done();
+                };
+
+            requestOptions.path = "/SimpleExpressServerTest";
+
+            simpleExpressServer.get(requestOptions.path, middleware);
+
+            expressServer = simpleExpressServer.start();
+
+            request = http.request(requestOptions, function (res) { /*do nothing */ });
 
             request.end();
 
