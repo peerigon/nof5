@@ -1,3 +1,5 @@
+"use strict";
+
 var expect = require("expect.js"),
     fs = require("fs"),
     path = require("path"),
@@ -5,13 +7,12 @@ var expect = require("expect.js"),
     DirectoryMasterWatcher = require("../lib/DirectoryMasterWatcher.js"),
     EventEmitter = require("events").EventEmitter;
 
-describe("#DirectoryMasterWatcher", function () {
+describe("DirectoryMasterWatcher", function () {
 
     var dummyDirectory = __dirname + "/dummyDirectory/";
 
-
-
     describe("#constructor", function () {
+
         it("should be a Function", function () {
             expect(DirectoryMasterWatcher).to.be.a(Function);
         });
@@ -23,9 +24,10 @@ describe("#DirectoryMasterWatcher", function () {
         it("should inherit from EventEmitter", function () {
             expect(new DirectoryMasterWatcher()).to.be.an(EventEmitter);
         });
+
     });
 
-    describe("#watch", function () {
+    describe("# watch()", function () {
 
         var directoryMasterWatcher;
 
@@ -33,7 +35,7 @@ describe("#DirectoryMasterWatcher", function () {
             directoryMasterWatcher = new DirectoryMasterWatcher();
         });
 
-        describe("#Error-Handling", function () {
+        describe("Error", function () {
 
             it("should throw an Error if no directory path given", function () {
                 expect(function () {
@@ -47,35 +49,19 @@ describe("#DirectoryMasterWatcher", function () {
                 }).to.throwError();
             });
 
-        });
+            it("should throw an Error on a second call of # watch()", function () {
+                fs.mkdirSync(dummyDirectory);
 
-        describe("#second call", function () {
-            it("should close all existing watchers on a second valid call to watch() and create new ones", function (done) {
-                fs.mkdir(dummyDirectory, function (error) {
-                    if (error) {
-                        throw error;
-                    }
+                directoryMasterWatcher.watch(__dirname);
 
+                expect(function () {
                     directoryMasterWatcher.watch(__dirname);
-                    directoryMasterWatcher.on("change", function () {
-                        throw new Error("Test failed. Close was called an this listener should be dead.");
-                    });
+                }).to.throwError();
 
-                    directoryMasterWatcher.close();
 
-                    directoryMasterWatcher.watch(__dirname);
-                    directoryMasterWatcher.once("change", function () {
-                        done();
-                    });
-
-                    fs.rmdir(dummyDirectory, function (error) {
-                        if (error) {
-                            throw error;
-                        }
-                    });
-
-                });
+                fs.rmdirSync(dummyDirectory);
             });
+
         });
 
     });
@@ -84,20 +70,12 @@ describe("#DirectoryMasterWatcher", function () {
 
         var directoryMasterWatcher;
 
-        beforeEach(function (done) {
+        beforeEach(function () {
             directoryMasterWatcher = new DirectoryMasterWatcher();
 
+            fs.mkdirSync(dummyDirectory);
 
-            fs.mkdir(dummyDirectory, function (error) {
-
-                if (error && error.code !== "EEXIST") {
-                    throw error;
-                }
-
-                directoryMasterWatcher.watch(__dirname);
-
-                done();
-            });
+            directoryMasterWatcher.watch(__dirname);
         });
 
         afterEach(function () {
@@ -113,13 +91,9 @@ describe("#DirectoryMasterWatcher", function () {
 
                 directoryMasterWatcher.close();
 
-                fs.rmdir(dummyDirectory, function (error) {
-                    if(error) {
-                        throw error;
-                    }
+                fs.rmdirSync(dummyDirectory);
 
-                    done();
-                });
+                done();
             });
 
             it("should throw an 'change'-Event if in any watched directory a change occurs", function (done) {
@@ -127,11 +101,7 @@ describe("#DirectoryMasterWatcher", function () {
                     done();
                 });
 
-                fs.rmdir(dummyDirectory, function (error) {
-                    if (error) {
-                        throw error;
-                    }
-                });
+                fs.rmdirSync(dummyDirectory);
             });
         });
     });

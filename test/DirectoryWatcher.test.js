@@ -7,6 +7,7 @@ var expect = require("expect.js"),
 describe("#DirectoryWatcher", function () {
 
     describe("#constructor", function () {
+
        it("should be a Function", function () {
             expect(DirectoryWatcher).to.be.a(Function);
        });
@@ -37,22 +38,20 @@ describe("#DirectoryWatcher", function () {
         var directoryWatcher,
             dummyDirectory = __dirname + "/dummyDirectory/";
 
-        beforeEach(function (done) {
-
-            fs.mkdir(dummyDirectory, function (error) {
-                if (error && error.code !== "EEXIST") {
-                    throw error;
-                }
-
-                directoryWatcher = new DirectoryWatcher(dummyDirectory);
-
-                done();
-            });
+        beforeEach(function () {
+            fs.mkdirSync(dummyDirectory);
+            directoryWatcher = new DirectoryWatcher(dummyDirectory);
         });
 
         afterEach(function () {
             directoryWatcher.close();
+            try {
+                fs.rmdirSync(dummyDirectory);
+            } catch (error) {
+                //Do nothing. Tests cleaned after themselves.
+            }
         });
+
 
         describe("#dirChange-Event", function () {
 
@@ -63,27 +62,20 @@ describe("#DirectoryWatcher", function () {
 
                 directoryWatcher.close();
 
-                fs.rmdir(dummyDirectory, function (error) {
-                    if (error) {
-                        throw error;
-                    }
+                fs.rmdirSync(dummyDirectory);
 
-                    done();
-                });
-
+                done();
             });
+
 
             it("should throw an 'dirChange'-Event if any change occurs in watched directory", function (done) {
                 directoryWatcher.once("dirChange", function (event, filename) {
                     done();
                 });
 
-                fs.rmdir(dummyDirectory, function (error) {
-                    if (error) {
-                        throw error;
-                    }
-                });
+                fs.rmdirSync(dummyDirectory);
             });
+
         });
 
     });
