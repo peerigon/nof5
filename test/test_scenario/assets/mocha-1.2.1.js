@@ -513,7 +513,7 @@
          */
 
         var Suite = require('../suite')
-            , Test = require('../test');
+            , Test = require('.');
 
         /**
          * BDD-style interface:
@@ -608,7 +608,7 @@
          */
 
         var Suite = require('../suite')
-            , Test = require('../test');
+            , Test = require('.');
 
         /**
          * TDD-style interface:
@@ -680,7 +680,7 @@
          */
 
         var Suite = require('../suite')
-            , Test = require('../test');
+            , Test = require('.');
 
         /**
          * QUnit-style interface:
@@ -775,7 +775,7 @@
          */
 
         var Suite = require('../suite')
-            , Test = require('../test');
+            , Test = require('.');
 
         /**
          * TDD-style interface:
