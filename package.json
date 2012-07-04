@@ -1,7 +1,7 @@
 {
     "name": "nof5",
     "description": "A tool which runs unit tests if a file has changed on the server in a browser",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "author": {
         "name": "Paul Torka",
         "email": "paul.torka@yahoo.de"
