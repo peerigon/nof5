@@ -8,4 +8,8 @@ describe("Object", function () {
         expect({}).to.be.an(Object);
     });
 
+    it("should also be an Object", function () {
+        expect([]).to.be.an(Object);
+    });
+
 });
