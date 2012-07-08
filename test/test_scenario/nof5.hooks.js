@@ -1,17 +1,20 @@
 "use strict";
 
-exports.browserifyMiddleware = function () {
-    return [function () {
-        //console.log("browsierfyMiddleware 1");
-    }, function () {
-        //console.log("browsierfyMiddleware 2");
-    }];
+var beforeExecTimes = 0,
+    beforeEachExecTimes = 0;
+
+exports.before = function () {
+    ++beforeExecTimes;
 };
 
-exports.beforeEach = function (callback) {
-    if (typeof callback === "function") {
-        callback();
-    }
+exports.getBeforeExecTimes = function() {
+    return beforeExecTimes;
+};
 
-    //console.log("hook: beforeEach");
+exports.beforeEach = function () {
+  ++beforeEachExecTimes;
+};
+
+exports.getBeforeEachExecTimes = function () {
+    return beforeEachExecTimes;
 };
