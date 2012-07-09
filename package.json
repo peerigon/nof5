@@ -1,7 +1,7 @@
 {
     "name": "nof5",
     "description": "A tool which runs unit tests if a file has changed on the server in a browser",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "author": {
         "name": "Paul Torka",
         "email": "paul.torka@yahoo.de"
@@ -16,9 +16,7 @@
         "socket.io": "0.9.x",
         "underscore": "1.3.x",
         "fshelpers": "git://github.com/pandaa/fshelpers.git",
-        "browserify-bypass": "0.1.x",
-        "browserify": "1.13.3",
-        "rewire": "0.3.x"
+        "browserify": "1.13.3"
     },
     "devDependencies": {
         "mocha": "1.1.x",
