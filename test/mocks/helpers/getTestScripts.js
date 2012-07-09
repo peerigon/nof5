@@ -12,7 +12,7 @@ module.exports = function getTestScripts(folder) {
     var testScripts = [];
 
     finder.on("file", function onFile (file) {
-        if (file.search(/\.test\.js/g) >= -1) {
+        if (file.search(/\.test\.js/g) > -1) {
             testScripts.push(file);
         }
     });
