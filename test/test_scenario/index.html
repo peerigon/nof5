@@ -21,6 +21,30 @@
 
             nof5.enableTests();
 
+            mocha.Runner.prototype.on("fail", function onFail(test) {
+
+                mocha.Runner.prototype.once("test end", function () {
+
+                    console.log(test);
+
+                    var emitableError = {
+                        "title": test.title,
+                        "error": test.err.toString()
+
+                    };
+
+                    nof5.socket.emit("fail", navigator.userAgent, emitableError);
+
+                });
+
+            });
+
+            mocha.Runner.prototype.on("suite end", function onSuiteEnd(suite) {
+                if (suite.root) {
+                    nof5.socket.emit("suite end", navigator.userAgent);
+                }
+            });
+
             mocha.run();
         });
     </script>
