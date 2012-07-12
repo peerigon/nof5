@@ -7,7 +7,7 @@ var Hooks = require("../lib/Hooks.js");
 
 describe("Hooks", function () {
 
-   var hooksFilePath = path.resolve(__dirname + "/test_scenario/nof5.hooks.js"),
+   var hooksFilePath = path.resolve(__dirname + "/../example/nof5.hooks.js"),
        hooksFile,
        hooks;
 
@@ -15,7 +15,7 @@ describe("Hooks", function () {
 
         delete require.cache[hooksFilePath];
 
-        hooksFile = require(__dirname + "/test_scenario/nof5.hooks.js");
+        hooksFile = require(hooksFilePath);
 
         hooks = new Hooks();
         hooks.init(hooksFilePath);
