@@ -12,44 +12,7 @@
 
     <script type="text/javascript" src="tests.js"></script>
 
-    <script>
-        nof5.socket.on("connect", function onConnect() {
-            jQuery(function onDomReady() {
-                mocha.setup({
-                    ui:"bdd",
-                    globals: ["io"]
-                });
-
-                mocha.Runner.prototype.on("suite", function (suite) {
-                    if(suite.root) {
-                        nof5.socket.emit("start", new Date().getTime());
-                    }
-                });
-
-                mocha.Runner.prototype.on("fail", function onFail(test) {
-                    mocha.Runner.prototype.once("test end", function () {
-                        var error = {
-                            "suite": test.parent.title,
-                            "test": test.title,
-                            "type": test.err.toString()
-                        };
-
-                        nof5.socket.emit("fail", error);
-                    });
-                });
-
-                mocha.Runner.prototype.on("suite end", function onSuiteEnd(suite) {
-                    if (suite.root) {
-                        nof5.socket.emit("end", new Date().getTime());
-                    }
-                });
-
-                nof5.enableTests();
-
-                mocha.run();
-            });
-        });
-    </script>
+    <script type="text/javascript" src= assets/testRunner.js></script>
 
 </head>
 <body>
