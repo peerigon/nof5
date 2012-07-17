@@ -23,11 +23,7 @@
 
             mocha.Runner.prototype.on("fail", function onFail(test) {
 
-                console.log("fail");
-
                 mocha.Runner.prototype.once("test end", function onTestEnd() {
-
-                    console.log("test end");
 
                     var error = {
                         "suite": test.parent.title,
