@@ -1,10 +1,18 @@
 (function (window) {
-    nof5.socket.on("connect", function onConnect() {
+    "use strict";
 
-        jQuery(function onDomReady() {
+    var nof5 = window.nof5,
+        mocha = window.mocha;
+
+    jQuery(function onDomReady() {
+
+        nof5.socket.on("connect", function onConnect() {
+
+            jQuery("#mocha").empty();
+
             mocha.setup({
                 ui:"bdd",
-                globals: ["io"]
+                globals: ["io", "getInterface"] //getInterface seems to a global function from mocha ^^
             });
 
             mocha.Runner.prototype.on("suite", function (suite) {
@@ -14,7 +22,13 @@
             });
 
             mocha.Runner.prototype.on("fail", function onFail(test) {
-                mocha.Runner.prototype.once("test end", function () {
+
+                console.log("fail");
+
+                mocha.Runner.prototype.once("test end", function onTestEnd() {
+
+                    console.log("test end");
+
                     var error = {
                         "suite": test.parent.title,
                         "test": test.title,
@@ -32,31 +46,31 @@
             });
 
             nof5.enableTests();
-
             mocha.run();
 
-            //@TODO remove this hack
+            function onf5() {
 
-            var isRunning = false;
+                var oldTests = jQuery("script[src='tests.js']");
 
-            nof5.socket.on("f5", function onf5() {
-                if (!isRunning) {
-                    isRunning = true;
-                    var oldTests = jQuery("script[src='tests.js']");
-
-                    if (oldTests.length !== 0) {
-                        jQuery("script[src='tests.js']").remove();
-                    }
-
-                    jQuery.getScript("tests.js", function onTestsLoaded() {
-                        jQuery("#mocha").empty();
-
-                        nof5.enableTests();
-
-                        mocha.run();
-                    });
+                if (oldTests.length !== 0) {
+                    jQuery("script[src='tests.js']").remove();
                 }
-            });
+
+                jQuery.getScript("tests.js", function onTestsLoaded() {
+
+                    jQuery("#mocha").empty();
+
+                    nof5.enableTests();
+                    mocha.run();
+
+                    nof5.socket.once("f5", onf5);
+
+                });
+            }
+
+
+            nof5.socket.once("f5", onf5);
         });
     });
+
 })(window);
