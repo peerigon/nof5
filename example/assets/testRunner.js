@@ -41,9 +41,6 @@
                 }
             });
 
-            nof5.enableTests();
-            mocha.run();
-
             function onf5() {
 
                 var oldTests = jQuery("script[src='tests.js']");
@@ -63,7 +60,6 @@
 
                 });
             }
-
 
             nof5.socket.once("f5", onf5);
         });
