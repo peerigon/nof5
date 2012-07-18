@@ -5,12 +5,16 @@ var EventEmitter = require("events").EventEmitter,
 
 function SocketIOMock() {
 
-    var self = this
+    var self = this;
 
     EventEmitter.call(this);
 
     this.listen = function () {
         return self;
+    };
+
+    this.configure = function () {
+
     };
 
 }
