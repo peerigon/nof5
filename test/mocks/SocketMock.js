@@ -8,8 +8,6 @@ function SocketMock() {
 
     EventEmitter.call(this);
 
-
-
 }
 
 util.inherits(SocketMock, EventEmitter);
