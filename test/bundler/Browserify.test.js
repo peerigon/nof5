@@ -16,10 +16,10 @@ describe("BrowserifyBundler", function () {
         bundler = new BrowserifyBundler();
     });
 
-    describe("# get()", function () {
+    describe("# _get()", function () {
 
         it("should return a string", function () {
-           expect(typeof bundler.get(testScripts)).to.be.equal("string");
+           expect(typeof bundler._get(testScripts)).to.be.equal("string");
         });
 
     });
@@ -30,7 +30,7 @@ describe("BrowserifyBundler", function () {
             bundler.use(function () {
                 done();
             });
-            bundler.get();
+            bundler._get();
         });
 
         it("should also except a collection of middleware as an array", function (done) {
@@ -42,7 +42,7 @@ describe("BrowserifyBundler", function () {
                     done();
                 }
             ]);
-            bundler.get();
+            bundler._get();
         });
 
         it("should use middleware in the given order", function () {
@@ -59,7 +59,7 @@ describe("BrowserifyBundler", function () {
                     executionOrder.push(3);
                 }
             ]);
-            bundler.get();
+            bundler._get();
 
             expect(executionOrder[0]).to.be.equal(predictedOrder[0]);
             expect(executionOrder[1]).to.be.equal(predictedOrder[1]);

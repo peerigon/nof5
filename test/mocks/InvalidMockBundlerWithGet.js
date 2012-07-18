@@ -2,7 +2,7 @@
 
 function InvalidMockBundlerWithGet() {
 
-    this.get = function () {
+    this._get = function () {
         return 1;
     };
 

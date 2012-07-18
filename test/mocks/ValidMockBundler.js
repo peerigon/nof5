@@ -15,9 +15,13 @@ function ValidMockBundler() {
      * @param {array} passedTestScripts
      * @return {string}
      */
-    this.get = function (passedTestScripts) {
+    this._get = function (passedTestScripts) {
         testScripts = passedTestScripts;
         return "string";
+    };
+
+    this.doNothing = function () {
+        //should really do nothing
     };
 }
 

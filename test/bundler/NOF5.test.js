@@ -16,15 +16,15 @@ describe("NOF5", function () {
         bundler = new NOF5Bundler();
     });
 
-    describe("# get()", function () {
+    describe("# _get()", function () {
 
         it("should return a string", function () {
-            expect(typeof bundler.get(testScripts)).to.be.equal("string");
+            expect(typeof bundler._get(testScripts)).to.be.equal("string");
         });
 
         it("should contain each given test-script", function () {
 
-            var bundle = bundler.get(testScripts);
+            var bundle = bundler._get(testScripts);
 
             _(testScripts).each(function testScriptsIterator (testScript) {
                 expect(bundle.search("//@ sourceURL=" + testScript) > -1).to.be(true);
