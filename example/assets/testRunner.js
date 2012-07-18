@@ -4,7 +4,7 @@
     var nof5 = window.nof5,
         mocha = window.mocha;
 
-    jQuery(function onDomReady() {
+    jQuery(function onReady() {
 
         nof5.socket.on("connect", function onConnect() {
 
@@ -38,10 +38,13 @@
             mocha.Runner.prototype.on("suite end", function onSuiteEnd(suite) {
                 if (suite.root) {
                     nof5.socket.emit("end", new Date());
+                    mocha.Runner.prototype.removeAllListeners("test end");
                 }
             });
 
             function onf5() {
+
+                console.log(new Date().toLocaleTimeString() + ": re-running tests");
 
                 var oldTests = jQuery("script[src='tests.js']");
 
@@ -61,7 +64,12 @@
                 });
             }
 
-            nof5.socket.once("f5", onf5);
+            //Run tests initially
+            onf5();
+        });
+
+        nof5.socket.on("disconnect", function onDisconnect() {
+            mocha.Runner.prototype.removeAllListeners();
         });
     });
 
