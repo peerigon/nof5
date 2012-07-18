@@ -39,13 +39,13 @@ describe("ClientTest", function () {
 
         it("should throw an Error if you don't pass a user-agent-string as first argument", function () {
             expect(function () {
-                clientTest = new Client(undefined, socketMock);
+                clientTest = new ClientTest(undefined, socketMock);
             }).to.throwError();
         });
 
         it("should throw an Error if you don't pass a some kind of socket as second argument", function () {
             expect(function () {
-                clientTest = new Client(userAgent);
+                clientTest = new ClientTest(userAgent);
             }).to.throwError();
         });
 
@@ -87,12 +87,12 @@ describe("ClientTest", function () {
         });
 
         it("should be 'succeeded' if a test ends without failing", function () {
-           expect(clientTest.getTestState()).to.be.equal('succeeded');
+           expect(clientTest.getTestState()).to.be.equal('\u001b[32msucceeded\u001b[0m');
         });
 
         it("should be 'failed' if a test failed", function () {
             socketMock.emit("fail");
-            expect(clientTest.getTestState()).to.be.equal('failed');
+            expect(clientTest.getTestState()).to.be.equal('\u001b[31mfailed\u001b[0m');
         });
     });
 
