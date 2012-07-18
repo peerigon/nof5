@@ -6,6 +6,7 @@ var path = require("path"),
 
 var socketIO = require("socket.io"),
     SocketIOMock = require("./mocks/socketIOMock.js"),
+    SocketMock = require("./mocks/SocketMock.js"),
     EventEmitter = require("events").EventEmitter,
     SimpleExpressServer = require("../lib/SimpleExpressServer.js"),
     SimpleSocketIOServer = rewire("../lib/SimpleSocketIOServer.js");
@@ -52,18 +53,19 @@ describe("SimpleSocketIOServer", function () {
     describe("'connect'-Event", function () {
 
         var socketIOMock,
-            sockets;
+            sockets,
+            socket1Id = 1,
+            socket2Id = "2",
+            socket3Id = "id3";
 
         beforeEach(function () {
 
             socketIOMock = new SocketIOMock();
-            sockets = [{
-                "id": 1
-            }, {
-                "id": "2"
-            }, {
-                "id": "id1"
-            }];
+            sockets = [
+                new SocketMock(socket1Id),
+                new SocketMock(socket2Id),
+                new SocketMock(socket3Id)
+            ];
 
             SimpleSocketIOServer.__set__({
                 "socketIO": socketIOMock
@@ -113,19 +115,21 @@ describe("SimpleSocketIOServer", function () {
                 done();
             });
 
-            socketIOMock.emit("disconnect");
+            socketIOMock.emit("connection", sockets[0]);
+            sockets[0].emit("disconnect");
         });
 
-        it("should pass the closed socket as argument to 'disconnect'-listener's callback", function () {
+        it("should pass the closed socket as argument to 'disconnect'-listener's callback", function (done) {
             socketIOServer.on("disconnect", function (socket) {
                 expect(socket.id).to.be.equal(sockets[2].id);
+                done();
             });
 
             socketIOMock.emit("connection", sockets[0]);
             socketIOMock.emit("connection", sockets[1]);
             socketIOMock.emit("connection", sockets[2]);
 
-            socketIOMock.emit("disconnect", sockets[2]);
+            sockets[2].emit("disconnect");
         });
 
     });
