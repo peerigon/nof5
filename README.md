@@ -3,24 +3,45 @@ nof5
 
 [![Build Status](http://roomieplanet-dev.rz.hs-augsburg.de:8080/job/nof5/badge/icon)](http://roomieplanet-dev.rz.hs-augsburg.de:8080/job/nof5/)
 
-See the following documentation as roadmap:
+# What is nof5?
 
-# Description
+**nof5** is a server for automated browser testing based on express and socket.io. It watches your lib- and test-folder
+and emits on a change an event called **f5** to all connected clients. You can connect as many browsers as you want.
+On **f5** the clients can fetch a new test-bundle and re-run it. So you don't have to manually reload your tests. That's
+why it is called *nof5*.
+It is also possible to send the test results back to the server. 
 
-nof5 is a tool which relies on express.js and socket.io and provides automated bundling and re-running of tests.
+Result will be displayed like this if they succeed
 
-# Running Tests
+> 13:20:55 Chrome/20.0.1132/Linux has connected 
 
-just execute: <code>nof5</code> in your test folder
+> 13:20:55 Chrome/20.0.1132/Linux has succeeded. Tests took 0.617 seconds
 
-# Conventions
+or like this if they fail
 
-Add a index.html with all dependencies to your test-folder's root. This will be the entry point for the tests.
+>13:31:34 Android/2.3.4/Android has failed. Tests took 5.625 seconds
 
-#Features
+>{ '.isAppended()': 
+   { test: 'should be false after # dispose()',
+     type: 'Error: expected false to equal true' } }
+     
+Writing xunit-files is on the road.
 
-* Use the test-runner of your choice (e.g. mocha)
-* Use the assertion-suite of your choice (e.g. expect.js)
-* Use the app specific environment (e.g. jQuery [Mobile], MooTools)
-* nof5 is able to use [browserify](https://github.com/substack/node-browserify)
-* Automated executing of tests in the browser if a change occurs in the test-folder ([socket.io](http://socket.io/)).
+**nof5** does not ship any test-suites like mocha or assertions suites like expect.js. So you can use any lib for writing
+you want to. But there is a [recipe](https://github.com/peerigon/nof5/blob/master/example/assets/testRunner.js) for mocha 
+and expect.js in the examples.
+
+# How to install it?
+
+    npm install -g nof5
+    
+# How to use it ?
+
+## Server
+
+## Client
+
+
+
+
+
