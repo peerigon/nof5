@@ -33,13 +33,17 @@ and expect.js in the examples.
 
 # How to install it?
 
-    npm install -g nof5 (not published yet)
+    npm install -g nof5 (not published yet!)
     
 # How to use it ?
 
 ## Server
 
 ## Client
+
+# Roadmap
+
+Check the issues tagged with *enhancement* and created by topa.
 
 
 
