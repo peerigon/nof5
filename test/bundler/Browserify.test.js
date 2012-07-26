@@ -3,7 +3,7 @@
 var expect = require("expect.js"),
     path = require("path"),
     getTestScripts = require("../mocks/helpers/getTestScripts.js"),
-    testScripts = getTestScripts(path.resolve(__dirname + "/../test_scenario"));
+    testScripts = getTestScripts(path.resolve(__dirname + "/../../example"));
 
 
 var BrowserifyBundler = require("../../lib/bundler/Browserify.js");

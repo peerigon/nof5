@@ -2,7 +2,7 @@
 
 var path = require("path"),
     expect = require("expect.js"),
-    testFolderPath = path.resolve(__dirname + "/../test_scenario/"),
+    testFolderPath = path.resolve(__dirname + "/../../example/"),
     hooksFilePath = testFolderPath + "/nof5.browserify.js";
 
 var Browserify = require("../../lib/bundler/Browserify.js"),

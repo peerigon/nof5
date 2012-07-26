@@ -4,7 +4,7 @@ var _ = require("underscore"),
     path = require("path"),
     expect = require("expect.js"),
     getTestScripts = require("../mocks/helpers/getTestScripts.js"),
-    testScripts = getTestScripts(path.resolve(__dirname + "/../test_scenario/"));
+    testScripts = getTestScripts(path.resolve(__dirname + "/../../example/"));
 
 var NOF5Bundler = require("../../lib/bundler/NOF5.js");
 
