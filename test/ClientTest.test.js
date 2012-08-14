@@ -11,13 +11,16 @@ describe("ClientTest", function () {
 
     var userAgentString = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11",
         userAgent = useragent.parse(userAgentString),
+        clientName = userAgent.family + "/" + userAgent.major + "." + userAgent.minor + "." + userAgent.patch + "/" + userAgent.os,
         error1 = {
-            "suite": "anysuite",
+            "client": clientName,
+            "suite": ["Suite", "Suite2"],
             "test": "anytest",
             "type": "anytype"
         },
         error2 = {
-            "suite": "somesuite",
+            "client": clientName,
+            "suite": ["Suite", "Suite2"],
             "test": "sometest",
             "type": "sometype"
         },
@@ -114,11 +117,13 @@ describe("ClientTest", function () {
             socketMock.emit("fail", error2);
 
             var errors = {};
-            errors[error1.suite] = {
+            errors[error1.client] = {
+                "suite": error1.suite,
                 "test": error1.test,
                 "type": error1.type
             };
-            errors[error2.suite] = {
+            errors[error2.client] = {
+                "suite": error2.suite,
                 "test": error2.test,
                 "type": error2.type
             };
