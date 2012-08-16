@@ -18,12 +18,15 @@
         "fshelpers": "git://github.com/peerigon/fshelpers.git",
         "useragent": "1.1.x",
         "browserify": "1.13.x",
-        "webpack": "0.6.x"
+        "webpack": "0.5.8"
     },
     "devDependencies": {
         "mocha": "1.1.x",
         "expect.js": "0.1.x",
         "rewire": "0.3.x"
+    },
+    "engines": {
+        "node": "<0.9.x"
     },
     "keywords": ["unit", "test", "testing", "tdd", "bdd", "browser", "nof5", "automated"],
     "repository": "git://github.com/peerigon/nof5.git",
