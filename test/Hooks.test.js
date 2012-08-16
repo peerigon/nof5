@@ -7,7 +7,7 @@ var Hooks = require("../lib/Hooks.js");
 
 describe("Hooks", function () {
 
-   var hooksFilePath = path.resolve(__dirname + "/../example/nof5.hooks.js"),
+   var hooksFilePath = path.resolve(__dirname + "/../example/browserify/nof5.hooks.js"),
        hooksFile,
        hooks;
 
