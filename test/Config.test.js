@@ -45,7 +45,11 @@ describe("Config", function () {
         });
 
         it("should use 'nof5-root/lib/client' for config.clientFolder", function () {
-            expect(config.clientFolder).to.equal(path.resolve(__dirname + "/../client" + "/"));
+            expect(config.clientFolder).to.equal(path.resolve(__dirname + "/../lib/client") + "/");
+        });
+
+        it("should use no static folder as default for 'assetsFolder'", function () {
+            expect(config.assetsFolder).to.equal(undefined);
         });
 
     });
