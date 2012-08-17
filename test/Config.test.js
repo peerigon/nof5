@@ -1,6 +1,7 @@
 "use strict";
 
-var expect = require("expect.js");
+var expect = require("expect.js"),
+    path = require("path");
 
 var Config = require("../lib/Config.js");
 
@@ -41,6 +42,10 @@ describe("Config", function () {
 
         it("should use config.testFolder + '/nof5.browserify.hooks.js' as default for 'browserifyHooksFile'", function () {
             expect(config.browserifyHooksFile).to.equal(config.testFolder + '/nof5.browserify.hooks.js');
+        });
+
+        it("should use 'nof5-root/lib/client' for config.clientFolder", function () {
+            expect(config.clientFolder).to.equal(path.resolve(__dirname + "/../client" + "/"));
         });
 
     });
