@@ -19,6 +19,10 @@ describe("Config", function () {
             expect(config).to.be.an(Object);
         });
 
+        it("should use 11234 as default for 'port'", function () {
+            expect(config.port).to.equal(11234);
+        });
+
         it("should use process.cwd() as default for 'testFolder'", function () {
            expect(config.testFolder).to.equal(process.cwd());
         });
