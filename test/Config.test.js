@@ -35,12 +35,12 @@ describe("Config", function () {
             expect(config.hooksFile).to.equal(config.testFolder + "/nof5.hooks.js");
         });
 
-        it("should use config.testFolder + '/webpack.hooks.js' as default for 'webpackHooksFile'", function () {
-            expect(config.webpackHooksFile).to.equal(config.testFolder + '/webpack.hooks.js');
+        it("should use config.testFolder + '/nof5.webpack.hooks.js' as default for 'webpackHooksFile'", function () {
+            expect(config.webpackHooksFile).to.equal(config.testFolder + '/nof5.webpack.hooks.js');
         });
 
-        it("should use config.testFolder + '/browserify.hooks.js' as default for 'browserifyHooksFile'", function () {
-            expect(config.browserifyHooksFile).to.equal(config.testFolder + '/browserify.hooks.js');
+        it("should use config.testFolder + '/nof5.browserify.hooks.js' as default for 'browserifyHooksFile'", function () {
+            expect(config.browserifyHooksFile).to.equal(config.testFolder + '/nof5.browserify.hooks.js');
         });
 
     });
