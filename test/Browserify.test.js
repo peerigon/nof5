@@ -2,11 +2,11 @@
 
 var expect = require("expect.js"),
     path = require("path"),
-    getTestScripts = require("../mocks/helpers/getTestScripts.js"),
-    testScripts = getTestScripts(path.resolve(__dirname + "/../../example"));
+    getTestScripts = require("./mocks/helpers/getTestScripts.js"),
+    testScripts = getTestScripts(path.resolve(__dirname + "/../example"));
 
 
-var BrowserifyBundler = require("../../lib/bundler/Browserify.js");
+var BrowserifyBundler = require("../lib/bundler/Browserify.js");
 
 describe("BrowserifyBundler", function () {
 

@@ -2,11 +2,11 @@
 
 var path = require("path"),
     expect = require("expect.js"),
-    testFolderPath = path.resolve(__dirname + "/../../example/"),
+    testFolderPath = path.resolve(__dirname + "/../example/browserify/"),
     hooksFilePath = testFolderPath + "/nof5.browserify.js";
 
-var Browserify = require("../../lib/bundler/Browserify.js"),
-    BrowserifyHooks = require("../../lib/bundler/BrowserifyHooks.js");
+var Browserify = require("../lib/bundler/Browserify.js"),
+    BrowserifyHooks = require("../lib/bundler/BrowserifyHooks.js");
 
 describe("BrowserifyHooks", function () {
 

@@ -48,7 +48,7 @@ describe("BundlerFactory", function () {
            bundler = bundlerFactory.build(validBundlerMockPath, testFolderPath);
         });
 
-        //@TODO Tests
+
         /*
         describe(".get()", function () {
 
