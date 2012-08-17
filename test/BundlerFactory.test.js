@@ -48,26 +48,20 @@ describe("BundlerFactory", function () {
            bundler = bundlerFactory.build(validBundlerMockPath, testFolderPath);
         });
 
-
-        /*
         describe(".get()", function () {
 
-            it("should throw an Error if get has NOT returned a string", function () {
-                bundler = bundlerFactory.build(
-                    path.resolve(__dirname + "/mocks/InvalidMockBundlerWithGet.js"),
-                    testFolderPath
-                );
-
-                expect(function () {
-                    bundler.get();
-                }).to.throwError();
+            it("should call given callback to .get()", function (done) {
+                bundler.get(function onBundled() {
+                    done();
+                });
             });
-            
-            it("should return a string", function () {
-                expect(typeof bundler.get()).to.be.equal("string");
+
+            it("should pass a string to given callback", function () {
+                bundler.get(function onBundled(string) {
+                    expect(typeof string).to.equal("string");
+                });
             });
         });
-        */
         
     });
 
