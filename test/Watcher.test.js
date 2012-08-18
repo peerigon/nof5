@@ -1,13 +1,14 @@
 "use strict";
 
 var fs = require("fs"),
+    Finder = require("fshelpers").Finder,
     path = require("path"),
     expect = require("expect.js");
 
 var Watcher = require("../lib/Watcher.js"),
     EventEmitter = require("events").EventEmitter;
 
-var testFolderPath = path.resolve(__dirname + "/../example/"),
+var testFolderPath = path.resolve(__dirname + "/../example/webpack/"),
     dummyFolderName = "/dummyFolderName";
 
 describe("Watcher", function () {
@@ -44,6 +45,23 @@ describe("Watcher", function () {
 
             fs.renameSync(testFolderPath + "/" + oldTestFileName, testFolderPath + "/" + "brandNewName");
             fs.renameSync(testFolderPath + "/" + "brandNewName", testFolderPath + "/" + oldTestFileName);
+        });
+
+    });
+
+    describe(".getWatchedDirs", function () {
+
+        it("should return an Array including all watched directories as string", function () {
+            var finder = new Finder(),
+                watchedDirs = [];
+
+            finder.on("dir", function onDir(fullDirPath) {
+                watchedDirs.push(fullDirPath);
+            });
+
+            finder.walkSync(testFolderPath);
+
+            expect(watcher.getWatchedDirs()).to.eql(watchedDirs);
         });
 
     });
