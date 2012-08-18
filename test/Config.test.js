@@ -52,6 +52,10 @@ describe("Config", function () {
             expect(config.assetsFolder).to.equal(undefined);
         });
 
+        it("debug should be false as default", function () {
+            expect(config.debug).to.equal(false);
+        });
+
     });
 
 });
