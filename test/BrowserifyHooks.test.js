@@ -5,7 +5,7 @@ var path = require("path"),
     testFolderPath = path.resolve(__dirname + "/../example/browserify/"),
     hooksFilePath = testFolderPath + "/nof5.browserify.hooks.js";
 
-var Browserify = require("../lib/bundler/Browserify.js"),
+var Browserify = require("../lib/bundler/BrowserifyBundler.js"),
     BrowserifyHooks = require("../lib/bundler/BrowserifyHooks.js");
 
 describe("BrowserifyHooks", function () {

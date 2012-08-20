@@ -6,7 +6,7 @@ var _ = require("underscore"),
     getTestScripts = require("./mocks/helpers/getTestScripts.js"),
     testScripts = getTestScripts(path.resolve(__dirname + "/../example/"));
 
-var NOF5Bundler = require("../lib/bundler/NOF5.js");
+var NOF5Bundler = require("../lib/bundler/NOF5Bundler.js");
 
 describe("NOF5", function () {
 

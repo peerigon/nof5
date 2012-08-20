@@ -6,7 +6,7 @@ var expect = require("expect.js"),
     testScripts = getTestScripts(path.resolve(__dirname + "/../example"));
 
 
-var BrowserifyBundler = require("../lib/bundler/Browserify.js");
+var BrowserifyBundler = require("../lib/bundler/BrowserifyBundler.js");
 
 describe("BrowserifyBundler", function () {
 
