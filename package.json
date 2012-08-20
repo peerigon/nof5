@@ -7,8 +7,9 @@
         "email": "paul.torka@yahoo.de"
     },
     "contributors": [
-        { "name": "Paul Torka", "email": "paul.torka@yahoo.de" },
-        { "name": "Johannes Ewald", "email": "mail@johannesewald.de" }
+        { "name": "Paul Torka", "email": "paul.torka@peerigon.com" },
+        { "name": "Johannes Ewald", "email": "johannes.ewald@peerigon.com" },
+        { "name": "Matthias Jahn", "email": "matthias.jahn@peerigon.com" }
     ],
     "dependencies": {
         "commander": "1.0.x",
