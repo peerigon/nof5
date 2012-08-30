@@ -419,9 +419,12 @@ describe("Config", function () {
                 config = new Config();
 
                 expect(config.supportedBundlers).to.eql([
-                    'Webpack',
                     'Browserify',
-                    'NOF5'
+                    'NOF5',
+                    'Webpack'
+//                    'Webpack',
+//                    'Browserify',
+//                    'NOF5'
                 ]);
 
             });
