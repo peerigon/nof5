@@ -122,8 +122,6 @@ describe("ClientTest", function () {
 
             var errors = [error1, error2];
             
-            console.log(errors);
-
             expect(clientTest.getErrors()).to.be.eql(errors);
         });
 
