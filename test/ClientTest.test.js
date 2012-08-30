@@ -126,4 +126,26 @@ describe("ClientTest", function () {
         });
 
     });
+    
+    describe(".getErrorsXUnit()", function () {
+        
+        it("should return null if no errors where given", function () {
+            expect(clientTest.getErrorsXUnit()).to.be.equal(null);
+        });
+        
+        it("should return errors in xunit format", function() {
+                        socketMock.emit("fail", error1);
+            socketMock.emit("fail", error2);
+            
+            var jade = require('jade'),
+                path = require("path"),
+                jadePath = path.resolve(__dirname, '../xunit.jade'),
+                str = require('fs').readFileSync(jadePath, 'utf8'),
+                fn = jade.compile(str, {filename: jadePath, pretty: true}),
+                errs = clientTest.getErrors(),
+                errorsXUnit = fn({ errs: errs });
+            
+            expect(clientTest.getErrorsXUnit()).to.be.equal(errorsXUnit);
+        });
+    })
 });
