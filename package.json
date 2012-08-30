@@ -18,7 +18,8 @@
         "fshelpers": "git://github.com/peerigon/fshelpers.git",
         "useragent": "1.1.x",
         "browserify": "1.14.x",
-        "webpack": "0.5.8"
+        "webpack": "0.5.8",
+        "jade": "0.27.x"
     },
     "devDependencies": {
         "mocha": "1.3.x",
