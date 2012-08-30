@@ -16,13 +16,17 @@ describe("ClientTest", function () {
             "client": clientName,
             "suite": ["Suite", "Suite2"],
             "test": "anytest",
-            "type": "anytype"
+            "type": "anytype",
+            "stack": "Error: expected 2 to equal 1\n    at Assertion.assert (http://localhost:11234/tests.js:152:13)\n    at Assertion.<anonymous> (http://localhost:11234/tests.js:253:10)\n    at Function.equal (http://localhost:11234/tests.js:522:17)\n    at Context.<anonymous> (http://localhost:11234/tests.js:1306:41)\n    at Test.run (http://localhost:11234/assets/mocha-1.3.0.js:3320:44)\n    at Runner.runTest (http://localhost:11234/assets/mocha-1.3.0.js:3632:22)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3678:26\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3560:28)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3569:21\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3517:35)",
+            "state": "failed"
         },
         error2 = {
             "client": clientName,
             "suite": ["Suite", "Suite2"],
             "test": "sometest",
-            "type": "sometype"
+            "type": "sometype",
+            "stack": "Error: expected 2 to equal 1\n    at Assertion.assert (http://localhost:11234/tests.js:152:13)\n    at Assertion.<anonymous> (http://localhost:11234/tests.js:253:10)\n    at Function.equal (http://localhost:11234/tests.js:522:17)\n    at Context.<anonymous> (http://localhost:11234/tests.js:1306:41)\n    at Test.run (http://localhost:11234/assets/mocha-1.3.0.js:3320:44)\n    at Runner.runTest (http://localhost:11234/assets/mocha-1.3.0.js:3632:22)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3678:26\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3560:28)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3569:21\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3517:35)",
+            "state": "failed"
         },
         clientTest,
         socketMock,
@@ -120,12 +124,16 @@ describe("ClientTest", function () {
             errors[error1.client] = {
                 "suite": error1.suite,
                 "test": error1.test,
-                "type": error1.type
+                "type": error1.type,
+                "stack": error1.stack,
+                "state": error1.state
             };
             errors[error2.client] = {
                 "suite": error2.suite,
                 "test": error2.test,
-                "type": error2.type
+                "type": error2.type,
+                "stack": error2.stack,
+                "state": error2.state
             };
 
             expect(clientTest.getErrors()).to.be.eql(errors);

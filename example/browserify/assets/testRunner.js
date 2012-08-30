@@ -40,7 +40,9 @@
                     var error = {
                         "suite": suites,
                         "test": test.title,
-                        "type": test.err.toString()
+                        "type": test.err.toString(),
+                        "stack": test.err.stack,
+                        "state": test.state
                     };
 
                     socket.emit("fail", error);
