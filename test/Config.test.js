@@ -412,21 +412,71 @@ describe("Config", function () {
 
         });
 
-        describe("supportedBundlers", function () {
+//        describe("supportedBundlers", function () {
+//
+//            it("should contain all files with postfix Bundler in ..lib/bundler/", function () {
+//
+//                config = new Config();
+//
+//                expect(config.supportedBundlers).to.eql([
+//                    'NOF5',
+//                    'Browserify',
+//                    'Webpack'
+////                    'Webpack',
+////                    'Browserify',
+////                    'NOF5'
+//                ]);
+//
+//            });
+//
+//        });
 
-            it("should contain all files with postfix Bundler in ..lib/bundler/", function () {
+
+        describe("xunit", function () {
+
+            it("should default to null", function () {
+                config = new Config();
+
+                expect(config.xunit).to.equal(null);
+                expect(config.writeXUnitFile).to.equal(false);
+            });
+
+            it("should be the value passed with -x", function () {
+                argv.push("-x");
+                argv.push(__dirname);
 
                 config = new Config();
 
-                expect(config.supportedBundlers).to.eql([
-                    'Browserify',
-                    'NOF5',
-                    'Webpack'
-//                    'Webpack',
-//                    'Browserify',
-//                    'NOF5'
-                ]);
+                expect(config.xunit).to.equal(__dirname);
+                expect(config.writeXUnitFile).to.equal(true);
+            });
 
+            it("should be the value passed with --xunit", function () {
+                argv.push("--xunit");
+                argv.push(__dirname);
+
+                config = new Config();
+
+                expect(config.xunit).to.equal(__dirname);
+                expect(config.writeXUnitFile).to.equal(true);
+            });
+
+            it("should throw an error if a non-directory-path was passed with -x", function () {
+                argv.push("-x");
+                argv.push("/a/not/existing/path/");
+
+                expect(function () {
+                    config = new Config();
+                }).to.throwError();
+            });
+            
+            it("should throw an error if a non-direcory-path was passed with --xunit", function () {
+                argv.push("--xunit");
+                argv.push("/a/not/existing/path/");
+                
+                expect(function () {
+                    config = new Config();
+                }).to.throwError();
             });
 
         });
