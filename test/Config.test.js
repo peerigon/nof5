@@ -412,24 +412,24 @@ describe("Config", function () {
 
         });
 
-//        describe("supportedBundlers", function () {
-//
-//            it("should contain all files with postfix Bundler in ..lib/bundler/", function () {
-//
-//                config = new Config();
-//
-//                expect(config.supportedBundlers).to.eql([
-//                    'NOF5',
+        describe("supportedBundlers", function () {
+
+            it("should contain all files with postfix Bundler in ..lib/bundler/", function () {
+
+                config = new Config();
+
+                expect(config.supportedBundlers).to.eql([
+                    'Browserify',
+                    'NOF5',
+                    'Webpack'
+//                    'Webpack',
 //                    'Browserify',
-//                    'Webpack'
-////                    'Webpack',
-////                    'Browserify',
-////                    'NOF5'
-//                ]);
-//
-//            });
-//
-//        });
+//                    'NOF5'
+                ]);
+
+            });
+
+        });
 
 
         describe("xunit", function () {
