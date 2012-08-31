@@ -422,10 +422,7 @@ describe("Config", function () {
                     'Browserify',
                     'NOF5',
                     'Webpack'
-//                    'Webpack',
-//                    'Browserify',
-//                    'NOF5'
-                ]);
+                ].sort());
 
             });
 
