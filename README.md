@@ -41,10 +41,6 @@ and expect.js in the examples.
 
 ## Client
 
-# Roadmap
-
-Check the issues tagged with *enhancement* and created by topa.
-
 
 
 
