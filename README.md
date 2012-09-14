@@ -33,7 +33,7 @@ and expect.js in the examples.
 
 # How to install it?
 
-    npm install -g nof5 (not published yet!)
+    npm install -g nof5
     
 # How to use it ?
 
