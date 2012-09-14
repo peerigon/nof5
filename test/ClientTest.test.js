@@ -14,15 +14,19 @@ describe("ClientTest", function () {
         clientName = userAgent.family + "/" + userAgent.major + "." + userAgent.minor + "." + userAgent.patch + "/" + userAgent.os,
         error1 = {
             "client": clientName,
-            "suite": ["Suite", "Suite2"],
+            "suite": ["Suite", "Suite2"].toString(),
             "test": "anytest",
-            "type": "anytype"
+            "type": "anytype",
+            "stack": "Error: expected 2 to equal 1\n    at Assertion.assert (http://localhost:11234/tests.js:152:13)\n    at Assertion.<anonymous> (http://localhost:11234/tests.js:253:10)\n    at Function.equal (http://localhost:11234/tests.js:522:17)\n    at Context.<anonymous> (http://localhost:11234/tests.js:1306:41)\n    at Test.run (http://localhost:11234/assets/mocha-1.3.0.js:3320:44)\n    at Runner.runTest (http://localhost:11234/assets/mocha-1.3.0.js:3632:22)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3678:26\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3560:28)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3569:21\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3517:35)",
+            "state": "failed"
         },
         error2 = {
             "client": clientName,
-            "suite": ["Suite", "Suite2"],
+            "suite": ["Suite", "Suite2"].toString(),
             "test": "sometest",
-            "type": "sometype"
+            "type": "sometype",
+            "stack": "Error: expected 2 to equal 1\n    at Assertion.assert (http://localhost:11234/tests.js:152:13)\n    at Assertion.<anonymous> (http://localhost:11234/tests.js:253:10)\n    at Function.equal (http://localhost:11234/tests.js:522:17)\n    at Context.<anonymous> (http://localhost:11234/tests.js:1306:41)\n    at Test.run (http://localhost:11234/assets/mocha-1.3.0.js:3320:44)\n    at Runner.runTest (http://localhost:11234/assets/mocha-1.3.0.js:3632:22)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3678:26\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3560:28)\n    at http://localhost:11234/assets/mocha-1.3.0.js:3569:21\n    at next (http://localhost:11234/assets/mocha-1.3.0.js:3517:35)",
+            "state": "failed"
         },
         clientTest,
         socketMock,
@@ -116,20 +120,32 @@ describe("ClientTest", function () {
             socketMock.emit("fail", error1);
             socketMock.emit("fail", error2);
 
-            var errors = {};
-            errors[error1.client] = {
-                "suite": error1.suite,
-                "test": error1.test,
-                "type": error1.type
-            };
-            errors[error2.client] = {
-                "suite": error2.suite,
-                "test": error2.test,
-                "type": error2.type
-            };
-
+            var errors = [error1, error2];
+            
             expect(clientTest.getErrors()).to.be.eql(errors);
         });
 
     });
+    
+    describe(".getErrorsXUnit()", function () {
+        
+        it("should return null if no errors where given", function () {
+            expect(clientTest.getErrorsXUnit()).to.be.equal(null);
+        });
+        
+        it("should return errors in xunit format", function() {
+                        socketMock.emit("fail", error1);
+            socketMock.emit("fail", error2);
+            
+            var jade = require('jade'),
+                path = require("path"),
+                jadePath = path.resolve(__dirname, '../xunit.jade'),
+                str = require('fs').readFileSync(jadePath, 'utf8'),
+                fn = jade.compile(str, {filename: jadePath, pretty: true}),
+                errs = clientTest.getErrors(),
+                errorsXUnit = fn({ errs: errs });
+            
+            expect(clientTest.getErrorsXUnit()).to.be.equal(errorsXUnit);
+        });
+    })
 });

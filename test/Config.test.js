@@ -419,11 +419,120 @@ describe("Config", function () {
                 config = new Config();
 
                 expect(config.supportedBundlers).to.eql([
-                    'Webpack',
                     'Browserify',
-                    'NOF5'
-                ]);
+                    'NOF5',
+                    'Webpack'
+                ].sort());
 
+            });
+
+        });
+
+
+        describe("xunit", function () {
+
+            it("should default to null", function () {
+                config = new Config();
+
+                expect(config.xunit).to.equal(null);
+                expect(config.writeXUnitFile).to.equal(false);
+            });
+
+            it("should be the value passed with -x", function () {
+                argv.push("-x");
+                argv.push(__dirname);
+
+                config = new Config();
+
+                expect(config.xunit).to.equal(__dirname);
+                expect(config.writeXUnitFile).to.equal(true);
+            });
+
+            it("should be the value passed with --xunit", function () {
+                argv.push("--xunit");
+                argv.push(__dirname);
+
+                config = new Config();
+
+                expect(config.xunit).to.equal(__dirname);
+                expect(config.writeXUnitFile).to.equal(true);
+            });
+
+            it("should throw an error if a non-directory-path was passed with -x", function () {
+                argv.push("-x");
+                argv.push("/a/not/existing/path/");
+
+                expect(function () {
+                    config = new Config();
+                }).to.throwError();
+            });
+            
+            it("should throw an error if a non-direcory-path was passed with --xunit", function () {
+                argv.push("--xunit");
+                argv.push("/a/not/existing/path/");
+                
+                expect(function () {
+                    config = new Config();
+                }).to.throwError();
+            });
+
+        });
+
+        describe("clients hook", function() {
+
+            it("should default to null", function () {
+                config = new Config();
+
+                expect(config.clients).to.equal(null);
+                expect(config.isClientsHook).to.equal(false);
+            });
+
+            it("should be the value passed with -c", function () {
+                var clientsHookFilePath = path.resolve(__dirname, "../example/browserify/nof5.clients.hooks.js");
+
+                argv.push("-c");
+                argv.push(clientsHookFilePath);
+
+                config = new Config();
+
+                expect(config.clients).to.equal(clientsHookFilePath);
+                expect(config.isClientsHook).to.equal(true);
+            });
+
+            it("should be the value passed with --clients", function () {
+                var clientsHookFilePath = path.resolve(__dirname, "../example/browserify/nof5.clients.hooks.js");
+
+                argv.push("--clients");
+                argv.push(clientsHookFilePath);
+
+                config = new Config();
+
+                expect(config.clients).to.equal(clientsHookFilePath);
+                expect(config.isClientsHook).to.equal(true);
+            });
+
+            it("should throw an error if a non-existing-file-path was passed with -c", function() {
+                var clientsHooksFilePath =
+                    path.resolve(__dirname, "../example/browserify/not/existing/nof5.clients.hooks.js");
+
+                argv.push("-c");
+                argv.push("clientsHooksFilePath");
+
+                expect(function () {
+                    config = new Config();
+                }).to.throwError();
+            });
+
+            it("should throw an error if a non-existing-file-path was passed with --clients", function() {
+                var clientsHooksFilePath =
+                    path.resolve(__dirname, "../example/browserify/not/existing/nof5.clients.hooks.js");
+
+                argv.push("--clients");
+                argv.push(clientsHooksFilePath);
+
+                expect(function () {
+                    config = new Config();
+                }).to.throwError();
             });
 
         });
