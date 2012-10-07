@@ -1,6 +1,5 @@
-testsuite(name="Mocha Tests", errors=2, timestamp="Thu, 30 Aug 2012 14:35:17 GMT")
-    each error, i in errs
-        testcase(classname="#{error.suite}", name="#{error.test}", message="#{error.type}")
-            failure(classname="#{error.suite}", name="#{error.test}")
-                :cdata
-                    #{error.stack}
+each error, i in errs
+    testcase(classname="#{error.suite}", name="#{error.test}", message="#{error.type}")
+        failure(classname="#{error.suite}", name="#{error.test}")
+            :cdata
+                #{error.stack}
