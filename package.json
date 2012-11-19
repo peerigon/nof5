@@ -12,20 +12,20 @@
         { "name": "Matthias Jahn", "email": "matthias.jahn@peerigon.com" }
     ],
     "dependencies": {
-        "commander": "1.0.x",
-        "express": "2.5.8",
+        "commander": "1.x.x",
+        "express": "2.x.x",
         "socket.io": "0.9.x",
-        "underscore": "1.3.x",
+        "underscore": "1.x.x",
         "fshelpers": "git://github.com/peerigon/fshelpers.git",
         "useragent": "1.1.x",
-        "browserify": "1.14.x",
-        "webpack": "0.6.x",
+        "browserify": "1.x.x",
+        "webpack": "0.8.x",
         "jade": "0.27.x"
     },
     "devDependencies": {
-        "mocha": "1.3.x",
-        "expect.js": "0.1.x",
-        "rewire": "1.0.x"
+        "mocha": "1.x.x",
+        "expect.js": "0.x.x",
+        "rewire": "1.x.x"
     },
     "engines": {
         "node": "<0.9.x"
@@ -33,7 +33,9 @@
     "keywords": ["unit", "test", "testing", "tdd", "bdd", "browser", "nof5", "automated"],
     "repository": "git://github.com/peerigon/nof5.git",
     "main": "lib/index.js",
-    "bin": { "nof5": "./bin/nof5.js" },
+    "bin": {
+        "nof5": "./bin/nof5.js"
+    },
     "scripts": {
 
     }
