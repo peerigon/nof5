@@ -1,7 +1,10 @@
 "use strict";
 
-var expect = require("expect.js"),
-    path = require("path"),
+var path = require("path"),
+    EventEmitter = require("events").EventEmitter,
+
+    expect = require("expect.js"),
+
     getTestScripts = require("./mocks/helpers/getTestScripts.js"),
     testScripts = getTestScripts(path.resolve(__dirname + "/../example"));
 
@@ -16,15 +19,27 @@ describe("BrowserifyBundler", function () {
         bundler = new BrowserifyBundler();
     });
 
-    describe("# _get()", function () {
+    describe("EventEmitter", function () {
 
-        it("should return a string", function () {
-           expect(typeof bundler._get(testScripts)).to.be.equal("string");
+        it("should be an EventEmitter", function () {
+
+            expect(bundler instanceof EventEmitter).to.equal(true);
+
         });
 
     });
 
-    describe("# use", function () {
+    describe("._get()", function () {
+
+        it("should return a string", function () {
+
+           expect(typeof bundler._get(testScripts)).to.equal("string");
+
+        });
+
+    });
+
+    describe(".use", function () {
 
         it("should use given middleware for bundling", function (done) {
             bundler.use(function () {
@@ -72,7 +87,7 @@ describe("BrowserifyBundler", function () {
 
     });
 
-    describe("# ignore()", function () {
+    describe(".ignore()", function () {
 
         /*
         it("should ignore given files", function () {
