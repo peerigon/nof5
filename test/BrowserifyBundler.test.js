@@ -37,9 +37,11 @@ describe("BrowserifyBundler", function () {
 
         });
 
-        it("should emit an 'bundleReady'-Event", function (done) {
+        it("should emit an 'bundleReady'-Event and pass bundle as argument", function (done) {
 
-            bundler.on("bundleReady", function execDone() {
+            bundler.on("bundleReady", function execDone(bundle) {
+
+                expect(typeof bundle).to.equal("string");
 
                 done();
 
