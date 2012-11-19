@@ -37,6 +37,18 @@ describe("BrowserifyBundler", function () {
 
         });
 
+        it("should emit an 'bundleReady'-Event", function (done) {
+
+            bundler.on("bundleReady", function execDone() {
+
+                done();
+
+            });
+
+            bundler._get(testScripts);
+
+        });
+
     });
 
     describe(".use", function () {
