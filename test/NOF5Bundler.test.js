@@ -41,6 +41,7 @@ describe("NOF5", function () {
             var bundle = bundler._get(testScripts);
 
             _(testScripts).each(function testScriptsIterator (testScript) {
+                testScript = testScript.replace(/\\/g, "\\\\");
                 expect(bundle.search("//@ sourceURL=" + testScript) > -1).to.be(true);
             });
         });
