@@ -31,6 +31,11 @@ describe("Watcher", function () {
 
     describe("Events", function () {
 
+        it("should emit 'ready' when the directory tree has been walked", function (done) {
+            watcher = new Watcher(testFolder);
+            watcher.on("ready", done);
+        });
+
         it("should emit 'change' if a change in the given folder occurred", function (done) {
             var actions = [
                     function deleteFile() {
@@ -49,14 +54,16 @@ describe("Watcher", function () {
                 ],
                 watcher;
 
-            this.timeout(10000);
+            this.timeout(20000);
 
             function next() {
                 actions.shift()();
             }
 
             watcher = new Watcher(testFolder);
-            watcher.on("change", next);
+            watcher
+                .on("ready", next)
+                .on("change", next);
         });
 
     });
