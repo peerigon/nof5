@@ -1,7 +1,7 @@
 {
     "name": "nof5",
     "description": "A tool which runs unit tests if a file has changed on the server in a browser",
-    "version": "0.2.7",
+    "version": "0.3.0",
     "author": {
         "name": "Paul Torka",
         "email": "paul.torka@yahoo.de"
@@ -20,7 +20,8 @@
         "useragent": "1.1.x",
         "browserify": "1.x.x",
         "webpack": "0.8.x",
-        "jade": "0.27.x"
+        "jade": "0.27.x",
+        "watch": "0.x"
     },
     "devDependencies": {
         "mocha": "1.x.x",
@@ -37,6 +38,6 @@
         "nof5": "./bin/nof5.js"
     },
     "scripts": {
-
+        "test": "node node_modules/mocha/bin/mocha -R spec"
     }
 }

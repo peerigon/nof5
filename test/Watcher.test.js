@@ -1,28 +1,24 @@
 "use strict";
 
 var fs = require("fs"),
-    Finder = require("fshelpers").Finder,
     path = require("path"),
     expect = require("expect.js");
 
 var Watcher = require("../lib/Watcher.js"),
     EventEmitter = require("events").EventEmitter;
 
-var testFolderPath = path.resolve(__dirname + "/../example/webpack/"),
-    dummyFolderName = "/dummyFolderName";
+var testFolder = path.join(__dirname, "watchFolder"),
+    testSomeFile = path.join(testFolder, "someFile.js"),
+    testNewFile = path.join(testFolder, "newFile.js");
 
 describe("Watcher", function () {
 
     var watcher;
 
-    beforeEach(function () {
-        watcher = new Watcher(testFolderPath);
-    });
-
     describe(".construct()", function () {
 
         it("should inherit from EvenEmitter", function () {
-           expect(watcher).to.be.an(EventEmitter);
+           expect(new Watcher(testFolder)).to.be.an(EventEmitter);
         });
 
         it("should throw an Error if a wrong path is given", function () {
@@ -35,33 +31,32 @@ describe("Watcher", function () {
 
     describe("Events", function () {
 
-        it("should emit 'change' if a change with given folder occurred", function (done) {
-            var filesOrDirs = fs.readdirSync(testFolderPath),
-                oldTestFileName = filesOrDirs[0];
+        it("should emit 'change' if a change in the given folder occurred", function (done) {
+            var actions = [
+                    function deleteFile() {
+                        //console.log("delete");
+                        fs.unlinkSync(testSomeFile);
+                    },
+                    function createFile() {
+                        //console.log("create");
+                        fs.writeFileSync(testNewFile, "new", "utf8");
+                    },
+                    function renameFile() {
+                        //console.log("rename");
+                        fs.renameSync(testNewFile, testSomeFile);
+                    },
+                    done
+                ],
+                watcher;
 
-            watcher.on("change", function onChange() {
-                done();
-            });
+            this.timeout(10000);
 
-            fs.renameSync(testFolderPath + "/" + oldTestFileName, testFolderPath + "/" + "brandNewName");
-            fs.renameSync(testFolderPath + "/" + "brandNewName", testFolderPath + "/" + oldTestFileName);
-        });
+            function next() {
+                actions.shift()();
+            }
 
-    });
-
-    describe(".getWatchedDirs", function () {
-
-        it("should return an Array including all watched directories as string", function () {
-            var finder = new Finder(),
-                watchedDirs = [];
-
-            finder.on("dir", function onDir(fullDirPath) {
-                watchedDirs.push(fullDirPath);
-            });
-
-            finder.walkSync(testFolderPath);
-
-            expect(watcher.getWatchedDirs()).to.eql(watchedDirs);
+            watcher = new Watcher(testFolder);
+            watcher.on("change", next);
         });
 
     });
